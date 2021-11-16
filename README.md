@@ -30,3 +30,12 @@
   npm install --save styled-components
   npm install @types/styled-components @types/styled-components-react-native
   ```
+
+- #03 Context
+
+  ```bash
+  expo install @react-native-async-storage/async-storage
+  npx pod-install
+  ```
+
+- #04 Auth Navigation

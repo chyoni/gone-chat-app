@@ -1,17 +1,14 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import styled from 'styled-components/native';
-
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-const Text = styled.Text``;
+import AuthNavigator from './auth.navigator';
+import { CtxProvider } from './context';
 
 export default function App() {
   return (
-    <Container>
-      <Text>GONE CHAT APP</Text>
-    </Container>
+    <CtxProvider>
+      <NavigationContainer>
+        <AuthNavigator />
+      </NavigationContainer>
+    </CtxProvider>
   );
 }
