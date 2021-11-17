@@ -55,3 +55,5 @@
   - 7. Fonts provided by application에 해당 폰트 추가 (Fonts/폰트명.ttf) 이렇게
 
   참고: https://dev-yakuza.posstree.com/ko/react-native/react-native-custom-font/
+
+- #06 Login Screen 1

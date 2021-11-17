@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { DARK_GRAY, LIGHT_GRAY } from '../../constants';
 import { useCtx } from '../../context';
 
 const Container = styled.View`
@@ -13,7 +14,6 @@ const LogoContainer = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
   margin-top: 50px;
 `;
 const Logo = styled.Text`
@@ -25,9 +25,41 @@ const Logo = styled.Text`
 const MainContaier = styled.View`
   flex: 2;
   width: 100%;
-  border: 1px solid yellow;
+  align-items: center;
 `;
-const Text = styled.Text``;
+const UsernameInput = styled.TextInput`
+  width: 80%;
+  padding: 15px 13px;
+  margin-bottom: 15px;
+  background-color: ${DARK_GRAY};
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+`;
+const PasswordInput = styled.TextInput`
+  width: 80%;
+  padding: 15px 13px;
+  margin-bottom: 15px;
+  background-color: ${DARK_GRAY};
+  border-radius: 5px;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+`;
+const LoginBtn = styled.TouchableOpacity`
+  width: 80%;
+  padding: 15px 13px;
+  border-radius: 5px;
+  background-color: #289672;
+  justify-content: center;
+  align-items: center;
+`;
+const LoginText = styled.Text`
+  font-weight: 600;
+  color: white;
+  font-size: 14px;
+`;
 
 const Login = () => {
   return (
@@ -35,7 +67,19 @@ const Login = () => {
       <LogoContainer>
         <Logo>GoneChat</Logo>
       </LogoContainer>
-      <MainContaier />
+      <MainContaier>
+        <UsernameInput
+          placeholder={'Username'}
+          placeholderTextColor={LIGHT_GRAY}
+        />
+        <PasswordInput
+          placeholder={'Password'}
+          placeholderTextColor={LIGHT_GRAY}
+        />
+        <LoginBtn>
+          <LoginText>Log In</LoginText>
+        </LoginBtn>
+      </MainContaier>
     </Container>
   );
 };
