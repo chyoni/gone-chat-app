@@ -57,3 +57,5 @@
   참고: https://dev-yakuza.posstree.com/ko/react-native/react-native-custom-font/
 
 - #06 Login Screen 1
+
+- #07 Login Screen 2, Signup Screen 1

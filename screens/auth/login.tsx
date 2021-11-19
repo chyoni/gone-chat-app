@@ -1,7 +1,10 @@
-import React from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { ReactElement, useRef, useState } from 'react';
+import { Alert, TextInput } from 'react-native';
 import styled from 'styled-components/native';
-import { DARK_GRAY, LIGHT_GRAY } from '../../constants';
+import { DARK_GRAY, GREEN, LIGHT_GRAY } from '../../constants';
 import { useCtx } from '../../context';
+import { ChildrenLoggedNavParamList } from '../../navigators/logged.out.nav';
 
 const Container = styled.View`
   flex: 1;
@@ -51,7 +54,7 @@ const LoginBtn = styled.TouchableOpacity`
   width: 80%;
   padding: 15px 13px;
   border-radius: 5px;
-  background-color: #289672;
+  background-color: ${GREEN};
   justify-content: center;
   align-items: center;
 `;
@@ -60,8 +63,54 @@ const LoginText = styled.Text`
   color: white;
   font-size: 14px;
 `;
+const SignupContainer = styled.View`
+  width: 100%;
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+const SignupText = styled.Text`
+  color: white;
+  font-weight: 600;
+`;
+const SignupBtn = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+`;
+const SignupLink = styled.Text`
+  margin-left: 5px;
+  color: ${GREEN};
+  font-weight: 600;
+`;
 
-const Login = () => {
+const Login: React.FC<
+  NativeStackScreenProps<ChildrenLoggedNavParamList, 'login'>
+> = ({ navigation: { navigate } }) => {
+  const [username, setUsername] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const pwInput = useRef<TextInput>(null);
+  const onChangeUsernameText = (text: string) => {
+    setUsername(text);
+  };
+  const onChangePasswordText = (text: string) => {
+    setPassword(text);
+  };
+  const onSubmitUsernameEditing = () => {
+    pwInput.current?.focus();
+  };
+  const onSubmitPasswordEditing = () => {
+    if (
+      username === '' ||
+      username === undefined ||
+      password === '' ||
+      password === undefined
+    ) {
+      return Alert.alert('Check login form please.');
+    }
+    // React Query
+  };
+
   return (
     <Container>
       <LogoContainer>
@@ -69,16 +118,38 @@ const Login = () => {
       </LogoContainer>
       <MainContaier>
         <UsernameInput
+          value={username}
           placeholder={'Username'}
+          returnKeyType={'next'}
+          autoCapitalize={'none'}
+          textContentType={'username'}
+          autoCorrect={false}
           placeholderTextColor={LIGHT_GRAY}
+          onChangeText={onChangeUsernameText}
+          onSubmitEditing={onSubmitUsernameEditing}
         />
         <PasswordInput
+          ref={pwInput}
+          value={password}
           placeholder={'Password'}
+          returnKeyType={'done'}
+          textContentType={'password'}
+          secureTextEntry={true}
+          autoCorrect={false}
+          autoCapitalize={'none'}
           placeholderTextColor={LIGHT_GRAY}
+          onChangeText={onChangePasswordText}
+          onSubmitEditing={onSubmitPasswordEditing}
         />
-        <LoginBtn>
+        <LoginBtn onPress={onSubmitPasswordEditing}>
           <LoginText>Log In</LoginText>
         </LoginBtn>
+        <SignupContainer>
+          <SignupText>you haven't account? </SignupText>
+          <SignupBtn onPress={() => navigate('signup')}>
+            <SignupLink>Click here</SignupLink>
+          </SignupBtn>
+        </SignupContainer>
       </MainContaier>
     </Container>
   );
