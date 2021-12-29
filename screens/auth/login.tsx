@@ -1,7 +1,9 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { ReactElement, useRef, useState } from 'react';
-import { Alert, TextInput } from 'react-native';
+import { ActivityIndicator, Alert, TextInput } from 'react-native';
+import { useQuery } from 'react-query';
 import styled from 'styled-components/native';
+import { LoginResponse, userAPI } from '../../api';
 import { DARK_GRAY, GREEN, LIGHT_GRAY } from '../../constants';
 import { useCtx } from '../../context';
 import { ChildrenLoggedNavParamList } from '../../navigators/logged.out.nav';
@@ -87,9 +89,23 @@ const SignupLink = styled.Text`
 const Login: React.FC<
   NativeStackScreenProps<ChildrenLoggedNavParamList, 'login'>
 > = ({ navigation: { navigate } }) => {
-  const [username, setUsername] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const pwInput = useRef<TextInput>(null);
+  const ctx = useCtx();
+
+  const {
+    isLoading,
+    data,
+    refetch: loginFetch,
+  } = useQuery<any, any, LoginResponse, string[]>(
+    ['login', username, password],
+    userAPI.login,
+    {
+      enabled: false,
+    }
+  );
+
   const onChangeUsernameText = (text: string) => {
     setUsername(text);
   };
@@ -99,7 +115,7 @@ const Login: React.FC<
   const onSubmitUsernameEditing = () => {
     pwInput.current?.focus();
   };
-  const onSubmitPasswordEditing = () => {
+  const onSubmitPasswordEditing = async () => {
     if (
       username === '' ||
       username === undefined ||
@@ -108,7 +124,14 @@ const Login: React.FC<
     ) {
       return Alert.alert('Check login form please.');
     }
-    // React Query
+    const res = await loginFetch();
+    if (res.status === 'success' && res.error === null) {
+      return ctx?.setCurrentUser(res.data.token.access_token);
+    } else {
+      return Alert.alert(
+        'Somethings wrong. \n Check your username or password'
+      );
+    }
   };
 
   return (
@@ -142,7 +165,13 @@ const Login: React.FC<
           onSubmitEditing={onSubmitPasswordEditing}
         />
         <LoginBtn onPress={onSubmitPasswordEditing}>
-          <LoginText>Log In</LoginText>
+          <LoginText>
+            {isLoading ? (
+              <ActivityIndicator color={'white'} size={'small'} />
+            ) : (
+              'Log In'
+            )}
+          </LoginText>
         </LoginBtn>
         <SignupContainer>
           <SignupText>you haven't account? </SignupText>
