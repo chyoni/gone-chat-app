@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { QueryFunctionContext } from 'react-query';
 
-const BASE_URL = 'http://127.0.0.1:4000';
+const HTTP_BASE_URL = 'http://127.0.0.1:4000';
 
-const instance = axios.create({ baseURL: BASE_URL });
+const instance = axios.create({ baseURL: HTTP_BASE_URL });
 
 export interface LoginResponse {
   alias: string;
