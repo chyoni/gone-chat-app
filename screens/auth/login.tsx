@@ -170,11 +170,7 @@ const Login: React.FC<
           />
           <LoginBtn onPress={onSubmitPasswordEditing}>
             <LoginText>
-              {isLoading ? (
-                <ActivityIndicator color={'white'} size={'small'} />
-              ) : (
-                'Log In'
-              )}
+              {isLoading ? <ActivityIndicator color={'white'} /> : 'Log In'}
             </LoginText>
           </LoginBtn>
           <SignupContainer>

@@ -63,3 +63,5 @@
 - #08 Login API
 
 - #09 KeyboardAvoidingView
+
+- #10 Sign up API

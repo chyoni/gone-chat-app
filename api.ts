@@ -24,4 +24,14 @@ export const userAPI = {
       return res.data;
     });
   },
+  signup: (context: QueryFunctionContext<string[]>) => {
+    const [_, username, password, passwordConfirm, alias] = context.queryKey;
+    return instance({
+      method: 'POST',
+      url: '/user',
+      data: { username, password, confirm_password: passwordConfirm, alias },
+    }).then((res) => {
+      return res.data;
+    });
+  },
 };
