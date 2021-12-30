@@ -67,3 +67,5 @@
 - #10 Sign up API
 
 - #11 Logged In Nav 1
+
+- #12 Logged In Nav 2

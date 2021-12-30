@@ -130,11 +130,8 @@ const Login: React.FC<
     const res = await loginFetch();
     if (res.status === 'success' && res.error === null) {
       return ctx?.setCurrentUser(res.data.token.access_token);
-    } else {
-      return Alert.alert(
-        'Somethings wrong. \n Check your username or password'
-      );
     }
+    return Alert.alert(res.error.toString());
   };
 
   return (

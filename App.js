@@ -6,6 +6,9 @@ import Apploading from 'expo-app-loading';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import AuthNavigator from './auth.navigator';
 import { CtxProvider } from './context';
+import { ThemeProvider } from 'styled-components/native';
+import { useColorScheme } from 'react-native';
+import { darkTheme, lightTheme } from './styled';
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,8 @@ export default function App() {
     }
   }, []);
 
+  const isDark = useColorScheme() === 'dark';
+
   if (!ready) {
     return <Apploading />;
   }
@@ -35,9 +40,11 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <CtxProvider>
-        <NavigationContainer>
-          <AuthNavigator />
-        </NavigationContainer>
+        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+          <NavigationContainer>
+            <AuthNavigator />
+          </NavigationContainer>
+        </ThemeProvider>
       </CtxProvider>
     </QueryClientProvider>
   );

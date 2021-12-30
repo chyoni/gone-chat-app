@@ -110,11 +110,14 @@ const Signup: React.FC<
     setAlias(text);
   };
 
-  const { isLoading, refetch: signupRefetch } = useQuery(
-    ['signup', username, password, passwordConfirm, alias],
-    userAPI.signup,
-    { enabled: false }
-  );
+  const { isLoading, refetch: signupRefetch } = useQuery<
+    any,
+    any,
+    any,
+    string[]
+  >(['signup', username, password, passwordConfirm, alias], userAPI.signup, {
+    enabled: false,
+  });
 
   const onSubmitAliasEditing = async () => {
     if (
@@ -138,6 +141,7 @@ const Signup: React.FC<
         { text: 'OK', onPress: () => navigate('login') },
       ]);
     }
+    return Alert.alert(res.error.toString());
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

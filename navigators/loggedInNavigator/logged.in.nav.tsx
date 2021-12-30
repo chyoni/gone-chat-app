@@ -1,13 +1,21 @@
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { Text, View } from 'react-native';
+import Stack from './stack.nav';
+import Tabs from './tabs.nav';
 
-// 얘가 Root Nav이고 Tab, Stack만들어서 감싸야함
+export type RootStackParamList = {
+  Stack: undefined;
+  Tabs: undefined;
+};
+
+const Nav = createNativeStackNavigator<RootStackParamList>();
 
 const LoggedInNav = () => {
   return (
-    <View>
-      <Text>LoggedIn</Text>
-    </View>
+    <Nav.Navigator screenOptions={{ headerShown: false }}>
+      <Nav.Screen name={'Tabs'} component={Tabs} />
+      <Nav.Screen name={'Stack'} component={Stack} />
+    </Nav.Navigator>
   );
 };
 
