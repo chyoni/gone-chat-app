@@ -20,9 +20,15 @@ const Tabs = () => {
       screenOptions={{
         unmountOnBlur: true,
         tabBarLabelStyle: { fontSize: 12, fontWeight: '600', color: 'white' },
-        headerStyle: { backgroundColor: DARK_GRAY },
+        headerStyle: {
+          backgroundColor: DARK_GRAY,
+        },
         headerTitleStyle: { color: 'white' },
-        tabBarStyle: { backgroundColor: DARK_GRAY },
+        tabBarStyle: {
+          backgroundColor: DARK_GRAY,
+          borderTopWidth: 1,
+          borderTopColor: DARK_GRAY,
+        },
       }}
     >
       <Tab.Screen

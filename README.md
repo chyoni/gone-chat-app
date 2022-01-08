@@ -69,3 +69,5 @@
 - #11 Logged In Nav 1
 
 - #12 Logged In Nav 2
+
+- #13 Home Screen

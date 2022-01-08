@@ -10,7 +10,11 @@ const NativeStack = createNativeStackNavigator<ChildrenStackParamList>();
 
 const Stack = () => {
   return (
-    <NativeStack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
+    <NativeStack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+      }}
+    >
       <NativeStack.Screen name={'Room'} component={Room} />
     </NativeStack.Navigator>
   );
