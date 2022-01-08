@@ -129,6 +129,7 @@ const Login: React.FC<
     }
     const res = await loginFetch();
     if (res.status === 'success' && res.error === null) {
+      ctx?.setMe(res.data);
       return ctx?.setCurrentUser(res.data.token.access_token);
     }
     return Alert.alert(res.error.toString());

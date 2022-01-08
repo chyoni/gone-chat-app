@@ -11,6 +11,12 @@ export interface LoginResponse {
   id: number;
   token: { access_token: string; refresh_token: string };
   username: string;
+  created_at: number;
+  updated_at: number;
+}
+
+export interface RoomsResponse {
+  room_id?: number[];
 }
 
 export const userAPI = {
@@ -30,6 +36,21 @@ export const userAPI = {
       method: 'POST',
       url: '/user',
       data: { username, password, confirm_password: passwordConfirm, alias },
+    }).then((res) => {
+      return res.data;
+    });
+  },
+};
+
+export const roomAPI = {
+  getRooms: (context: QueryFunctionContext<any>) => {
+    const [_, userID, userToken] = context.queryKey;
+    return instance({
+      method: 'GET',
+      url: `/user/room/${userID}`,
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+      },
     }).then((res) => {
       return res.data;
     });
