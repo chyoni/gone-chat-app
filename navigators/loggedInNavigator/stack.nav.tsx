@@ -1,10 +1,15 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 import React from 'react';
 import { Room } from '../../screens/stacks/room';
 
 export type ChildrenStackParamList = {
-  Room: undefined;
+  Room: { roomID: number };
 };
+
+export type stackScreenProp = NativeStackNavigationProp<any>;
 
 const NativeStack = createNativeStackNavigator<ChildrenStackParamList>();
 

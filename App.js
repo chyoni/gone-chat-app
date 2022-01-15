@@ -1,4 +1,8 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -41,7 +45,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <CtxProvider>
         <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-          <NavigationContainer>
+          <NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
             <AuthNavigator />
           </NavigationContainer>
         </ThemeProvider>

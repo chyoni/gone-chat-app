@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, RefreshControl, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { useQuery, useQueryClient } from 'react-query';
 import styled from 'styled-components/native';
@@ -12,6 +12,10 @@ const LoadingContainer = styled.View`
   background-color: black;
   align-items: center;
   justify-content: center;
+`;
+
+const Seperator = styled.View`
+  margin-bottom: 10px;
 `;
 
 export const Rooms = () => {
@@ -45,13 +49,13 @@ export const Rooms = () => {
   return (
     <FlatList
       data={data?.room_id}
-      contentContainerStyle={{
-        backgroundColor: 'black',
-        flex: 1,
-      }}
-      onRefresh={onRefresh}
-      refreshing={refreshing}
+      contentContainerStyle={{ paddingHorizontal: 10, marginTop: 10 }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      ItemSeparatorComponent={() => <Seperator />}
       keyExtractor={roomsKeyExtractor}
+      // renderItem이 flex를 가져버리면 안된다. 왜냐하면 처음 렌더할 때 모두 같은 위치에 겹쳐 보이게 된다.
       renderItem={roomsRenderItem}
     />
   );

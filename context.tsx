@@ -38,7 +38,7 @@ export const CtxProvider: React.FC<{ children: React.ReactNode }> = ({
     modifyCurrentUser(token);
   };
 
-  const setMe = (setMePayload: IMeInterface) => {
+  const setMe = async (setMePayload: IMeInterface): Promise<void> => {
     modifyMe(setMePayload);
   };
 

@@ -6,7 +6,7 @@ import LoggedOutNav from './navigators/logged.out.nav';
 const AuthNavigator = () => {
   const ctx = useCtx();
 
-  if (ctx?.currentUser) {
+  if (ctx?.currentUser && ctx.me) {
     return <LoggedInNav />;
   } else {
     return <LoggedOutNav />;

@@ -18,7 +18,6 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        unmountOnBlur: true,
         tabBarLabelStyle: { fontSize: 12, fontWeight: '600', color: 'white' },
         headerStyle: {
           backgroundColor: DARK_GRAY,
