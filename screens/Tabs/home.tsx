@@ -1,7 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
-import { DARK_GRAY } from '../../constants';
 import { Ionicons } from '@expo/vector-icons';
 
 const Container = styled.View`

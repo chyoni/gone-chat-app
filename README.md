@@ -75,3 +75,8 @@
 - #14 Rooms Screen 1
 
 - #15 Room list and Room Screen
+
+- #16 Room Screen 2
+
+  - KeyboardAvoidingView를 써도 keyboard에 컴포넌트가 가려질 때가 있다. 그럴때는 props인 keyboardVerticalOffset를 설정해주면 되는데,
+    여기서 한 방식은 status bar height를 구해서 그 값에 48정도를 플러스해주면 딱 알맞게 보여진다. 이 원인이 react-navigation이랑 같이 KeyboardAvoidingView를 쓰면 그런다는데 여튼 참고하자.
